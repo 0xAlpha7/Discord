@@ -6,13 +6,19 @@ const tokens = (n) => {
 };
 
 describe("Discord", () => {
+  let Discord;
+  let discord;
+  beforeEach(async () => {
+    Discord = await ethers.getContractFactory("Discord");
+    discord = await Discord.deploy("Discord", "DC");
+  });
   describe("development", () => {
-    it("Sets the name and symbol", async () => {
-      const Discord = await ethers.getContractFactory("Discord");
-      const discord = await Discord.deploy("Discord", "DC");
+    it("Sets the name", async () => {
       let name = await discord.name();
-      let symbol = await discord.symbol();
       expect(name).to.equal("Discord");
+    });
+    it("Sets the symbol", async () => {
+      let symbol = await discord.symbol();
       expect(symbol).to.equal("DC");
     });
   });
