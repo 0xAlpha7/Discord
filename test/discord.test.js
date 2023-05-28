@@ -6,9 +6,10 @@ const tokens = (n) => {
 };
 
 describe("Discord", () => {
-  let Discord;
+  let Discord, deployer, user;
   let discord;
   beforeEach(async () => {
+    [deployer, user] = await ethers.getSigners();
     Discord = await ethers.getContractFactory("Discord");
     discord = await Discord.deploy("Discord", "DC");
   });
@@ -20,6 +21,10 @@ describe("Discord", () => {
     it("Sets the symbol", async () => {
       let symbol = await discord.symbol();
       expect(symbol).to.equal("DC");
+    });
+    it("Sets the owner", async () => {
+      let owner = await discord.owner();
+      expect(owner).to.equal(deployer.address);
     });
   });
 });
