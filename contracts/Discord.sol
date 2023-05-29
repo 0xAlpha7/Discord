@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract Discord is ERC721 {
-    uint256 totalChannels;
+    uint256 public totalChannels;
     address public owner;
 
     struct Channel {
@@ -18,8 +18,7 @@ contract Discord is ERC721 {
     }
     //cost is the fee to join the channel
     function createChanel(string memory _name, uint256 _cost) public {
-
-
-        
+        totalChannels += 1;
+        channels[totalChannels] = Channel(totalChannels, _name, _cost);
     }
 }
