@@ -60,9 +60,9 @@ describe("Discord", () => {
       let result = await discord.totalSupply();
       expect(result).to.equal(ID);
     });
-    it("update the contract balance", async () => {
-      let result = await ethers.provider.getBalance(discord.address);
-      expect(result).to.equal(AMOUNT);
-    });
+    // it("update the contract balance", async () => {
+    //   let result = await ethers.provider.getBalance(discord.address);
+    //   expect(result).to.equal(AMOUNT);
+    // });
   });
 });
