@@ -29,7 +29,11 @@ contract Discord is ERC721 {
         channels[totalChannels] = Channel(totalChannels, _name, _cost);
     }
     function mint(uint256 _id) public payable {
-        hasJoined[_id][msg.sender] = true;
+        require(_id != 0, "Id will not be 0");
+        require(_id <= totalChannels, "id should be less than total channels");
+        require(hasJoined[_id][msg.sender] == false, "Already joined");
+        require(msg.value >= channels[_id].cost, "invalid cost");
+        hasJoined[_id][msg.sender] = true; 
         totalSupply++;
         _safeMint(msg.sender, totalSupply);
         

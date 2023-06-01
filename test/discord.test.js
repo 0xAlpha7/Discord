@@ -44,7 +44,7 @@ describe("Discord", () => {
   });
   describe("joining channel", () => {
     const ID = 1;
-    const AMOUNT = ethers.utils.parseEther("0.002");
+    const AMOUNT = ethers.utils.parseEther("1");
 
     beforeEach(async () => {
       const transaction = await discord
@@ -53,7 +53,7 @@ describe("Discord", () => {
       await transaction.wait();
     });
     it("join the user", async () => {
-      let result = await discord.hasJoined(ID, user.address);
+      const result = await discord.hasJoined(ID, user.address);
       expect(result).to.equal(true);
     });
     it("increases total supply", async () => {
