@@ -13,6 +13,7 @@ contract Discord is ERC721 {
         uint256 cost;       
     }
     mapping (uint256 => Channel) public channels;
+    mapping (uint256 => mapping (address => bool)) public hasJoined; //channelId => userAddress => true/false
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Not owner");
@@ -28,6 +29,7 @@ contract Discord is ERC721 {
         channels[totalChannels] = Channel(totalChannels, _name, _cost);
     }
     function mint(uint256 _id) public payable {
+        hasJoined[_id][msg.sender] = true;
         totalSupply++;
         _safeMint(msg.sender, totalSupply);
         
