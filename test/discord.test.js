@@ -65,4 +65,21 @@ describe("Discord", () => {
       expect(result).to.equal(AMOUNT);
     });
   });
+  describe("withdrawing", () => {
+    const ID = 1;
+    const AMOUNT = ethers.utils.parseEther("10");
+    let balanceBefore;
+
+    beforeEach(async () => {
+      balanceBefore = await ethers.provider.getBalance(deployer.address);
+      let tx = await discord.connect(user).mint(ID, { value: AMOUNT });
+      await tx.wait();
+      tx = await discord.connect(deployer).withdraw();
+      await tx.wait();
+    });
+    it("update the owner balance", async () => {
+      const balanceAfter = await ethers.provider.getBalance(deployer.address);
+      expect(balanceAfter).to.greaterThan(balanceBefore);
+    });
+  });
 });
