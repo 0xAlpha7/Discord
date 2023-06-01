@@ -42,4 +42,27 @@ describe("Discord", () => {
       expect(channel.cost).to.equal(tokens(1));
     });
   });
+  describe("joining channel", () => {
+    const ID = 1;
+    const AMOUNT = ethers.utils.parseEther("0.002");
+
+    beforeEach(async () => {
+      const transaction = await discord
+        .connect(user)
+        .mint(ID, { value: AMOUNT });
+      await transaction.wait();
+    });
+    it("join the user", async () => {
+      let result = await discord.hasJoined(ID, user.address);
+      expect(result).to.equal(true);
+    });
+    it("increases total supply", async () => {
+      let result = await discord.totalSupply();
+      expect(result).to.equal(ID);
+    });
+    it("update the contract balance", async () => {
+      let result = await ethers.provider.getBalance(discord.address);
+      expect(result).to.equal(AMOUNT);
+    });
+  });
 });
