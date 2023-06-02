@@ -19,7 +19,6 @@ contract Discord is ERC721 {
         require(msg.sender == owner, "Not owner");
         _;
     }
-   
     constructor(string memory _name, string memory _symbol) ERC721(_name, _symbol) {
         owner = msg.sender;
     }
@@ -35,8 +34,7 @@ contract Discord is ERC721 {
         require(msg.value >= channels[_id].cost, "invalid cost");
         hasJoined[_id][msg.sender] = true; 
         totalSupply++;
-        _safeMint(msg.sender, totalSupply);
-        
+        _safeMint(msg.sender, totalSupply); 
     }
     function getChannel(uint256 _id) public view returns (Channel memory) {
         return channels[_id];
@@ -44,7 +42,6 @@ contract Discord is ERC721 {
     function withdraw() public onlyOwner() {
         require(address(this).balance !=0, "No balance");
         (bool success, ) = owner.call{value: address(this).balance}("");
-        require(success, "failed");
-        
+        require(success, "failed");   
     }
 }
