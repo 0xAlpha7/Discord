@@ -42,6 +42,7 @@ contract Discord is ERC721 {
         return channels[_id];
     }
     function withdraw() public onlyOwner() {
+        require(address(this).balance !=0, "No balance");
         (bool success, ) = owner.call{value: address(this).balance}("");
         require(success, "failed");
         
