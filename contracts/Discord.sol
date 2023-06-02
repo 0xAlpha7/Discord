@@ -37,6 +37,7 @@ contract Discord is ERC721 {
         _safeMint(msg.sender, totalSupply); 
     }
     function getChannel(uint256 _id) public view returns (Channel memory) {
+        require(_id != 0, "id will not be 0");
         return channels[_id];
     }
     function withdraw() public onlyOwner() {
