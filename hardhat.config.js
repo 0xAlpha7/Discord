@@ -29,6 +29,11 @@ module.exports = {
       accounts: [process.env.PRIVATE_KEY],
       chainId: 80001,
     },
+    arbitrumGoerli: {
+      url: "https://goerli-rollup.arbitrum.io/rpc",
+      chainId: 421613,
+      accounts: [process.env.PRIVATE_KEY],
+    },
   },
   solidity: "0.8.3",
 };
