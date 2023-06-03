@@ -14,6 +14,11 @@ module.exports = {
       url: "http://localhost:8545",
       chainId: 31337,
     },
+    sepolia: {
+      url: process.env.SEPOLIA_URL,
+      accounts: [process.env.PRIVATE_KEY],
+      chainId: 11155111,
+    },
   },
   solidity: "0.8.3",
 };
