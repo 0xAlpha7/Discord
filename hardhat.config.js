@@ -24,6 +24,11 @@ module.exports = {
       accounts: [process.env.PRIVATE_KEY],
       chainId: 5,
     },
+    mumbai: {
+      url: process.env.MUMBAI_URL || "",
+      accounts: [process.env.PRIVATE_KEY],
+      chainId: 80001,
+    },
   },
   solidity: "0.8.3",
 };
